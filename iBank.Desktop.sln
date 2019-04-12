@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28809.33
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iBank.Desktop", "iBank.Desktop.FX\iBank.Desktop.csproj", "{7FA5F172-A6E7-4658-AF39-13082355043B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iBank.Core", "iBank.Core\iBank.Core\iBank.Core.csproj", "{AFAAF3A3-6B58-4C0C-AB57-8D63E40DD0FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FA5F172-A6E7-4658-AF39-13082355043B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FA5F172-A6E7-4658-AF39-13082355043B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FA5F172-A6E7-4658-AF39-13082355043B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FA5F172-A6E7-4658-AF39-13082355043B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFAAF3A3-6B58-4C0C-AB57-8D63E40DD0FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFAAF3A3-6B58-4C0C-AB57-8D63E40DD0FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFAAF3A3-6B58-4C0C-AB57-8D63E40DD0FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFAAF3A3-6B58-4C0C-AB57-8D63E40DD0FD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B9A786D5-B933-4203-83FC-46A6DAC774BF}
+	EndGlobalSection
+EndGlobal

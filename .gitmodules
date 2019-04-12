@@ -1,0 +1,3 @@
+[submodule "iBank.Core"]
+	path = iBank.Core
+	url = https://github.com/mcap-ibank/iBank.Core.git

@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="iBank.Desktop.View.SPICView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:iBank.Desktop.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Button Content="Форумный отчет..." HorizontalAlignment="Left" Margin="165,12,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click"/>
+        <ListView ItemsSource="{Binding Months}" SelectedValue="{Binding SelectedMonth}" HorizontalAlignment="Left" Margin="10,10,0,10" Width="150" SelectionChanged="ListView_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Path=Month}">Месяц</GridViewColumn>
+                    <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Path=Count}">Кол-во</GridViewColumn>
+                </GridView>
+            </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Отчет ЕРЦ за дни" Click="MenuItem_SPICDays_OnClick"/>
+                    <MenuItem Header="Отчет ЕРЦ за месяц" Click="MenuItem_SPICMonth_OnClick"/>
+                    <!-- <MenuItem Header="Отчет ЕРЦ за призыв" Click="MenuItem_SPICLOL_OnClick"/> -->
+                    <!-- <MenuItem Header="Отчет ЕРЦ за год" Click="MenuItem_SPICYear_OnClick"/> -->
+                </ContextMenu>
+            </ListView.ContextMenu>
+        </ListView>
+        <Calendar x:Name="HH" DisplayDate ="{Binding SelectedDate}" HorizontalAlignment="Left" Margin="165,37,0,0" VerticalAlignment="Top" SelectionMode="MultipleRange"/>
+        <Button Content="Сравнить с форумом" HorizontalAlignment="Left" Margin="165,395,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click_1"/>
+        <ProgressBar Maximum="{Binding MaxProgress, IsAsync=True}" Value="{Binding CurrentProgress, IsAsync=True}" HorizontalAlignment="Left" Height="20" Margin="165,420,0,0" VerticalAlignment="Top" Width="625"/>
+
+    </Grid>
+</UserControl>

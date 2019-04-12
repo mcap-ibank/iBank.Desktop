@@ -1,0 +1,298 @@
+﻿<UserControl x:Class="iBank.Desktop.View.ImportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:iBank.Desktop.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:ErrorConverter x:Key="CellColorConverter" />
+        <Style x:Key="WrappedColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding}"></TextBlock>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <TabControl Margin="0" Grid.RowSpan="2">
+            <TabItem Header="Загрузка">
+                <Grid Background="#FFE5E5E5">
+                    <Grid Margin="0">
+                        <ListView HorizontalAlignment="Left" Margin="10,10,0,-22" Width="350" ItemsSource="{Binding Files}" SelectionChanged="ListView_SelectionChanged">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="30">
+                                        <GridViewColumn.Header>
+                                            <CheckBox Click="CheckBox_Click" />
+                                        </GridViewColumn.Header>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox IsChecked="{Binding IsSelected}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="220" DisplayMemberBinding="{Binding Name}" Header="Обнаруженные файлы"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Count}" Header="Кол-во записей"/>
+                                </GridView>
+                            </ListView.View>
+                            <ListView.Resources>
+                                <Style TargetType="{x:Type ListViewItem}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsImported}" Value="true">
+                                            <Setter Property="Background" Value="Green" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding HasError}" Value="true">
+                                            <Setter Property="Background" Value="Red" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListView.Resources>
+                        </ListView>
+                    </Grid>
+                    <Button Content="Выбрать папку..." HorizontalAlignment="Left" Margin="365,10,0,0" VerticalAlignment="Top" Width="120" Click="Button_SelectFolder_Click"/>
+                    <Button Content="Перенести в базу" HorizontalAlignment="Left" Margin="365,35,0,0" VerticalAlignment="Top" Width="120" Click="Button_Upload_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Проверка">
+                <Grid Background="#FFE5E5E5">
+                    <Button Content="Проверить электронку..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" Click="Button_CheckFile_Click"/>
+                    <DataGrid Margin="10,35,10,10" ItemsSource="{Binding PersonsToCheck}" SelectionMode="Single" IsReadOnly="True" CanUserReorderColumns="False" AutoGenerateColumns="False" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding Path=LastName}" Width="Auto" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource CellColorConverter}" ConverterParameter='LastName'>
+                                                    <Binding Path="WarningEnum"/>
+                                                    <Binding Path="ErrorEnum"/>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Foreground" Value="Black" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding Path=FirstName}" Width="Auto" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource CellColorConverter}" ConverterParameter='FirstName'>
+                                                    <Binding Path="WarningEnum"/>
+                                                    <Binding Path="ErrorEnum"/>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Foreground" Value="Black" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Отчество" Binding="{Binding Path=Patronymic}" Width="Auto" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource CellColorConverter}" ConverterParameter='Patronymic'>
+                                                    <Binding Path="WarningEnum"/>
+                                                    <Binding Path="ErrorEnum"/>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Foreground" Value="Black" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Дата рождения" Binding="{Binding Path=BirthDate}" Width="Auto" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource CellColorConverter}" ConverterParameter='BirthDate'>
+                                                    <Binding Path="WarningEnum"/>
+                                                    <Binding Path="ErrorEnum"/>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Foreground" Value="Black" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Место рождения" Binding="{Binding Path=BirthPlace}" Width="Auto" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource CellColorConverter}" ConverterParameter='BirthPlace'>
+                                                    <Binding Path="WarningEnum"/>
+                                                    <Binding Path="ErrorEnum"/>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Foreground" Value="Black" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Паспорт" Binding="{Binding Path=PassportSerial}" Width="Auto" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource CellColorConverter}" ConverterParameter='PassportSerial'>
+                                                    <Binding Path="WarningEnum"/>
+                                                    <Binding Path="ErrorEnum"/>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Foreground" Value="Black" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Выдан" Binding="{Binding Path=PassportIssue}" Width="Auto" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource CellColorConverter}" ConverterParameter='PassportIssue'>
+                                                    <Binding Path="WarningEnum"/>
+                                                    <Binding Path="ErrorEnum"/>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Foreground" Value="Black" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Дата выдачи" Binding="{Binding Path=PassportIssueDate}" Width="Auto" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource CellColorConverter}" ConverterParameter='PassportIssueDate'>
+                                                    <Binding Path="WarningEnum"/>
+                                                    <Binding Path="ErrorEnum"/>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Foreground" Value="Black" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Код" Binding="{Binding Path=PassportDivisionCode}" Width="Auto" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource CellColorConverter}" ConverterParameter='PassportDivisionCode'>
+                                                    <Binding Path="WarningEnum"/>
+                                                    <Binding Path="ErrorEnum"/>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Foreground" Value="Black" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Адрес" Binding="{Binding Path=Address}" Width="Auto" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource CellColorConverter}" ConverterParameter='Address'>
+                                                    <Binding Path="WarningEnum"/>
+                                                    <Binding Path="ErrorEnum"/>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Foreground" Value="Black" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Домашний телефон" Binding="{Binding Path=PhoneHome}" Width="Auto" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource CellColorConverter}" ConverterParameter='PhoneHome'>
+                                                    <Binding Path="WarningEnum"/>
+                                                    <Binding Path="ErrorEnum"/>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Foreground" Value="Black" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Мобильный телефон" Binding="{Binding Path=PhoneMobile}" Width="Auto" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource CellColorConverter}" ConverterParameter='PhoneMobile'>
+                                                    <Binding Path="WarningEnum"/>
+                                                    <Binding Path="ErrorEnum"/>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Foreground" Value="Black" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Кодовое слово" Binding="{Binding Path=Codeword}" Width="Auto" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource CellColorConverter}" ConverterParameter='Codeword'>
+                                                    <Binding Path="WarningEnum"/>
+                                                    <Binding Path="ErrorEnum"/>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Foreground" Value="Black" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Военкомат" Binding="{Binding Path=RecruitmentOffice}" Width="Auto" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource CellColorConverter}" ConverterParameter='RecruitmentOffice'>
+                                                    <Binding Path="WarningEnum"/>
+                                                    <Binding Path="ErrorEnum"/>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Foreground" Value="Black" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Комментарий" Binding="{Binding Path=Comment}" Width="Auto" HeaderStyle="{StaticResource WrappedColumnHeaderStyle}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource CellColorConverter}" ConverterParameter='Comment'>
+                                                    <Binding Path="WarningEnum"/>
+                                                    <Binding Path="ErrorEnum"/>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Foreground" Value="Black" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</UserControl>
