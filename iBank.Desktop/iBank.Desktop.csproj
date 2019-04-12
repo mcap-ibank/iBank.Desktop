@@ -40,7 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\iBank.Core\iBank.Core\iBank.Core.csproj" />
+    <ProjectReference Include="$(SolutionDir)\iBank.Core\iBank.Core\iBank.Core.csproj" />
   </ItemGroup>
   
 </Project>
