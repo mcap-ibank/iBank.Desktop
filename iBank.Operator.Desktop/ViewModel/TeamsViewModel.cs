@@ -1,5 +1,6 @@
 ﻿using iBank.Core;
 using iBank.Core.Database;
+using iBank.Core.Files;
 using iBank.Desktop.Data;
 using iBank.Desktop.DragDrop;
 
@@ -79,7 +80,7 @@ namespace iBank.Desktop.ViewModel
                     var mapper = new ModelToTableMapper<PersonTeamMetadata>();
                     mapper.AddMapping(c => c.PassportSerial, "passport_serial");
                     mapper.AddMapping(c => c.AccountNumberRegisteredInMilitaryID, "account_number_registered_in_military_id");
-                    Dependency = new SqlTableDependency<PersonTeamMetadata>(ConnectionManager.MSSQL_ConnectionString, "person_team_metadata", mapper: mapper);
+                    Dependency = new SqlTableDependency<PersonTeamMetadata>(new ConfigJsonFile().GetMainSQLConnectionString(), "person_team_metadata", mapper: mapper);
                     Dependency.OnChanged += Dep_PersonFromTeamList_OnChanged;
                     Dependency.OnChanged += UpdateTeamList;
                 }

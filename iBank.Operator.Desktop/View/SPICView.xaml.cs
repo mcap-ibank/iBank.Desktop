@@ -48,7 +48,7 @@ namespace iBank.Desktop.View
                 return;
             }
 
-            foreach(var fileName in openFileDialog.FileNames)
+            foreach (var fileName in openFileDialog.FileNames)
             {
                 var list = new List<Formirovanie>();
                 using (var p = new ExcelPackage(new FileInfo(fileName)))
@@ -306,5 +306,7 @@ namespace iBank.Desktop.View
 
             ViewModel.ImportDailyReportAsync(openFileDialog.FileNames);
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e) => ViewModel.Months.Clear();
     }
 }

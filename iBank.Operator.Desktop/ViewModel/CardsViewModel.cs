@@ -40,7 +40,7 @@ namespace iBank.Desktop.ViewModel
         public Task ImportDailyReportAsync() => Task.Run(() =>
         {
             var personsFromDatabase = PersonAccountNumber.GetAll().ToList();
-            var personsFromBank = VTBPerson.GetExecutedByDate(DateTime.Now).ToList();
+            var personsFromBank = BankProviderPerson.GetExecutedByDate(DateTime.Now).ToList();
             ImportPersonCount = $"Найдено: {personsFromBank.Count}";
             ImportMaxProgress = personsFromBank.Count;
             ImportCurrentProgress = 0;
@@ -173,7 +173,7 @@ IF @@ROWCOUNT = 0
         public Task CheckTotalReportAsync() => Task.Run(() =>
         {
             var personsFromDatabase = PersonAccountNumber.GetAll().ToList();
-            var personsFromBank = VTBPerson.GetAll().Where(p => !string.IsNullOrEmpty(p.PassportSerial)).ToList();
+            var personsFromBank = BankProviderPerson.GetAll().Where(p => !string.IsNullOrEmpty(p.PassportSerial)).ToList();
             CheckPersonCount = $"Найдено: {personsFromBank.Count}";
             CheckMaxProgress = personsFromDatabase.Count;
             CheckCurrentProgress = 0;

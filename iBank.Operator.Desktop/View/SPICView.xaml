@@ -24,9 +24,10 @@
                 </ContextMenu>
             </ListView.ContextMenu>
         </ListView>
-        <Calendar x:Name="HH" DisplayDate ="{Binding SelectedDate}" HorizontalAlignment="Left" Margin="165,37,0,0" VerticalAlignment="Top" SelectionMode="MultipleRange"/>
+        <Calendar x:Name="HH" DisplayDate ="{Binding SelectedDate}" HorizontalAlignment="Left" Margin="165,37,0,0" VerticalAlignment="Top" SelectionMode="MultipleRange" Width="225"/>
         <Button Content="Сравнить с форумом" HorizontalAlignment="Left" Margin="165,395,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click_1"/>
         <ProgressBar Maximum="{Binding MaxProgress, IsAsync=True}" Value="{Binding CurrentProgress, IsAsync=True}" HorizontalAlignment="Left" Height="20" Margin="165,420,0,0" VerticalAlignment="Top" Width="625"/>
+        <Button Content="Очистить" HorizontalAlignment="Left" Margin="290,12,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click_2"/>
 
     </Grid>
 </UserControl>
