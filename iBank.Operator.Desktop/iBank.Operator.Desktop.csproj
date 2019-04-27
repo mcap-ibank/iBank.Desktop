@@ -19,17 +19,6 @@
     <PackageIconUrl>https://raw.githubusercontent.com/mcap-ibank/iBank.Desktop/master/iBank.Desktop/icon.ico</PackageIconUrl>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <Platforms>AnyCPU</Platforms>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net461|AnyCPU'">
-    <NoWarn>1701;1702;RCS1036;</NoWarn>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net461|x86'">
-    <NoWarn>1701;1702;RCS1036;</NoWarn>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net461|x64'">
     <NoWarn>1701;1702;RCS1036;</NoWarn>
   </PropertyGroup>
 
@@ -51,7 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\iBank.Core\iBank.Core\iBank.Core.csproj" />
+    <ProjectReference Include="$(SolutionDir)\iBank.Core\iBank.Core\iBank.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
