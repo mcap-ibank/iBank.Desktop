@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace iBank.Desktop.Data
+namespace iBank.Operator.Desktop.Data
 {
     public class Entry
     {

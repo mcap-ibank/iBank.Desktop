@@ -3,13 +3,11 @@ using System.Windows;
 
 using GongSolutions.Wpf.DragDrop;
 
-using iBank.Core;
-using iBank.Core.Database;
+using iBank.Operator.Desktop.Database;
+using iBank.Operator.Desktop.Extensions;
+using iBank.Operator.Desktop.ViewModels;
 
-using iBank.Desktop.Extensions;
-using iBank.Desktop.ViewModel;
-
-namespace iBank.Desktop.DragDrop
+namespace iBank.Operator.Desktop.DragDrop
 {
     public class Item1DropTarget : IDropTarget
     {

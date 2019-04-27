@@ -1,8 +1,6 @@
-﻿using iBank.Core;
-using iBank.Core.Database;
-using iBank.Desktop.Data;
-using iBank.Desktop.Database;
-using iBank.Desktop.Extensions;
+﻿using iBank.Operator.Desktop.Data;
+using iBank.Operator.Desktop.Database;
+using iBank.Operator.Desktop.Extensions;
 
 using System;
 using System.Collections.ObjectModel;
@@ -11,7 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace iBank.Desktop.ViewModel
+namespace iBank.Operator.Desktop.ViewModels
 {
     public class CardsViewModel : INotifyPropertyChanged
     {
@@ -40,7 +38,7 @@ namespace iBank.Desktop.ViewModel
         public Task ImportDailyReportAsync() => Task.Run(() =>
         {
             var personsFromDatabase = PersonAccountNumber.GetAll().ToList();
-            var personsFromBank = BankProviderPerson.GetExecutedByDate(DateTime.Now).ToList();
+            var personsFromBank = BankProviderPersonExtensions.GetExecutedByDate(DateTime.Now).ToList();
             ImportPersonCount = $"Найдено: {personsFromBank.Count}";
             ImportMaxProgress = personsFromBank.Count;
             ImportCurrentProgress = 0;
@@ -173,7 +171,7 @@ IF @@ROWCOUNT = 0
         public Task CheckTotalReportAsync() => Task.Run(() =>
         {
             var personsFromDatabase = PersonAccountNumber.GetAll().ToList();
-            var personsFromBank = BankProviderPerson.GetAll().Where(p => !string.IsNullOrEmpty(p.PassportSerial)).ToList();
+            var personsFromBank = BankProviderPersonExtensions.GetAll().Where(p => !string.IsNullOrEmpty(p.PassportSerial)).ToList();
             CheckPersonCount = $"Найдено: {personsFromBank.Count}";
             CheckMaxProgress = personsFromDatabase.Count;
             CheckCurrentProgress = 0;

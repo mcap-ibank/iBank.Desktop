@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace iBank.Desktop.Data
+namespace iBank.Operator.Desktop.Data
 {
     public class ImportEntry : INotifyPropertyChanged
     {

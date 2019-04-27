@@ -1,10 +1,9 @@
-﻿using iBank.Core;
-using iBank.Core.Database;
-using iBank.Core.Utils;
+﻿using iBank.Operator.Desktop.Database;
+using iBank.Operator.Desktop.Extensions;
+using iBank.Operator.Desktop.Utils;
 
-using iBank.Desktop.Data;
-using iBank.Desktop.Extensions;
-using iBank.Desktop.ViewModel;
+using iBank.Operator.Desktop.Data;
+using iBank.Operator.Desktop.ViewModels;
 
 using Ookii.Dialogs.Wpf;
 
@@ -14,7 +13,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace iBank.Desktop.View
+namespace iBank.Operator.Desktop.Views
 {
     /// <summary>
     /// Interaction logic for ImportPersons.xaml

@@ -1,5 +1,4 @@
-﻿using iBank.Core;
-using iBank.Desktop.Data;
+﻿using iBank.Operator.Desktop.Data;
 
 using OfficeOpenXml;
 
@@ -13,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace iBank.Desktop.ViewModel
+namespace iBank.Operator.Desktop.ViewModels
 {
     public class SPICViewModel : INotifyPropertyChanged
     {

@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="iBank.Desktop.View.ImportView"
+﻿<UserControl x:Class="iBank.Operator.Desktop.Views.ImportView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:converters="clr-namespace:iBank.Desktop.Converters"
+             xmlns:converters="clr-namespace:iBank.Operator.Desktop.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>

@@ -1,10 +1,7 @@
-﻿using iBank.Core;
-using iBank.Core.Database;
-using iBank.Core.Utils;
-
-using iBank.Desktop.Data;
-using iBank.Desktop.Extensions;
-using iBank.Desktop.ViewModel;
+﻿using iBank.Operator.Desktop.Data;
+using iBank.Operator.Desktop.Database;
+using iBank.Operator.Desktop.Extensions;
+using iBank.Operator.Desktop.ViewModels;
 
 using OfficeOpenXml;
 
@@ -17,7 +14,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace iBank.Desktop.View
+namespace iBank.Operator.Desktop.Views
 {
     /// <summary>
     /// Interaction logic for Bank.xaml
@@ -102,14 +99,14 @@ namespace iBank.Desktop.View
         // Фильтрация ввода ФИО
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!CommonUtils.FilterText(e.Text[0]))
+            if (!iBank.Core.Utils.FilterText(e.Text[0]))
                 e.Handled = true;
         }
 
         // Фильтрация ввода паспорта
         private void TextBox2_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!CommonUtils.FilterPassport(e.Text[0]))
+            if (!iBank.Core.Utils.FilterPassport(e.Text[0]))
                 e.Handled = true;
         }
 

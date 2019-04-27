@@ -1,4 +1,4 @@
-﻿namespace iBank.Desktop.SpeechRecognition
+﻿namespace iBank.Operator.Desktop.SpeechRecognition
 {
     public enum DatabaseSpeechCommands { FindPerson }
 }

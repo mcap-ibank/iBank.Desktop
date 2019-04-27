@@ -3,12 +3,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-using iBank.Core.Database;
-using iBank.Core.Utils;
-using iBank.Desktop.SpeechRecognition;
-using iBank.Desktop.ViewModel;
+using iBank.Operator.Desktop.Database;
+using iBank.Operator.Desktop.Utils;
+using iBank.Operator.Desktop.SpeechRecognition;
+using iBank.Operator.Desktop.ViewModels;
 
-namespace iBank.Desktop.View
+using iBank.Core;
+
+namespace iBank.Operator.Desktop.Views
 {
 
     /// <summary>
@@ -83,19 +85,19 @@ namespace iBank.Desktop.View
 
         private void WatermarkTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!CommonUtils.FilterText(e.Text[0]))
+            if (!iBank.Core.Utils.FilterText(e.Text[0]))
                 e.Handled = true;
         }
 
         private void WatermarkTextBox2_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!CommonUtils.FilterPassport(e.Text[0]))
+            if (!iBank.Core.Utils.FilterPassport(e.Text[0]))
                 e.Handled = true;
         }
 
         private void WatermarkTextBox3_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!CommonUtils.FilterCardNumber(e.Text[0]))
+            if (!iBank.Core.Utils.FilterCardNumber(e.Text[0]))
                 e.Handled = true;
         }
 

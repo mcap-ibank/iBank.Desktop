@@ -3,9 +3,9 @@ using System.Drawing;
 using System.Globalization;
 using System.Windows.Data;
 
-using iBank.Core.Data;
+using iBank.Operator.Desktop.Data;
 
-namespace iBank.Desktop.Converters
+namespace iBank.Operator.Desktop.Converters
 {
     [ValueConversion(typeof(ErrorEnum), typeof(Brush))]
     public class ErrorConverter : IMultiValueConverter

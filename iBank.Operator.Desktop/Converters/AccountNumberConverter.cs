@@ -2,10 +2,10 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace iBank.Desktop.Converters
+namespace iBank.Operator.Desktop.Converters
 {
     [ValueConversion(typeof(string), typeof(string))]
-    public class AccountCumberConverter : IValueConverter
+    public class AccountNumberConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace iBank.Desktop
+namespace iBank.Operator.Desktop
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

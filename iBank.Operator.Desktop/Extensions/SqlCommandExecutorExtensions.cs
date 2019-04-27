@@ -1,8 +1,8 @@
-﻿using iBank.Core;
+﻿using iBank.Operator.Desktop.Utils;
 
 using System;
 
-namespace iBank.Desktop.Extensions
+namespace iBank.Operator.Desktop.Extensions
 {
     public static class SqlCommandExecutorExtensions
     {
@@ -15,7 +15,7 @@ namespace iBank.Desktop.Extensions
             }
             catch (Exception ex)
             {
-                Utils.ShowException(ex);
+                CommonUtils.ShowException(ex);
                 result = default;
                 return false;
             }
@@ -30,7 +30,7 @@ namespace iBank.Desktop.Extensions
             }
             catch (Exception ex)// when(ex is SqlException)
             {
-                Utils.ShowException(ex);
+                CommonUtils.ShowException(ex);
                 rowsAffected = 0;
                 return false;
             }

@@ -1,18 +1,18 @@
-﻿<Window x:Class="iBank.Desktop.MainWindow"
+﻿<Window x:Class="iBank.Operator.Desktop.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:view="clr-namespace:iBank.Desktop.View"
+        xmlns:views="clr-namespace:iBank.Operator.Desktop.Views"
         mc:Ignorable="d"
         Title="Программный комплекс iBank" Height="600" Width="1200" MinHeight="600" MinWidth="1200">
     <Grid>
         <TabControl x:Name="TabControl">
-            <TabItem Header="Банк"><view:BankView Width="Auto" Height="Auto" /></TabItem>
-            <TabItem Header="Прием"><view:ImportView Width="Auto" Height="Auto" /></TabItem>
-            <TabItem Header="Команды"><view:TeamView Width="Auto" Height="Auto" /></TabItem>
-            <TabItem Header="База Данных"><view:VerificationView Width="Auto" Height="Auto" /></TabItem>
-            <TabItem Header="ЕРЦ"><view:SPICView Width="Auto" Height="Auto" /></TabItem>
+            <TabItem Header="Банк"><views:BankView Width="Auto" Height="Auto" /></TabItem>
+            <TabItem Header="Прием"><views:ImportView Width="Auto" Height="Auto" /></TabItem>
+            <TabItem Header="Команды"><views:TeamView Width="Auto" Height="Auto" /></TabItem>
+            <TabItem Header="База Данных"><views:VerificationView Width="Auto" Height="Auto" /></TabItem>
+            <TabItem Header="ЕРЦ"><views:SPICView Width="Auto" Height="Auto" /></TabItem>
         </TabControl>
         
     </Grid>

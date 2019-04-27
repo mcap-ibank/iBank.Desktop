@@ -4,7 +4,7 @@ using Microsoft.Speech.Recognition;
 using System;
 using System.Globalization;
 
-namespace iBank.Desktop.SpeechRecognition
+namespace iBank.Operator.Desktop.SpeechRecognition
 {
     public static class SpeechRecognitionEngineExtensions
     {

@@ -4,12 +4,12 @@ using System.Linq;
 
 using ExcelDataReader;
 
-using iBank.Core.Database;
-using iBank.Core.Utils;
+using iBank.Operator.Desktop.Database;
+using iBank.Operator.Desktop.Utils;
 
 using OfficeOpenXml;
 
-namespace iBank.Desktop.Data
+namespace iBank.Operator.Desktop.Data
 {
     public static class ExcelLoader
     {

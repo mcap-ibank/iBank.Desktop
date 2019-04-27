@@ -1,4 +1,4 @@
-﻿namespace iBank.Desktop.Data
+﻿namespace iBank.Operator.Desktop.Data
 {
     public class Formirovanie
     {

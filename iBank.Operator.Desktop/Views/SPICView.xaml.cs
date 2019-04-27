@@ -1,7 +1,6 @@
-﻿using iBank.Core;
-using iBank.Core.Extensions;
-using iBank.Desktop.Data;
-using iBank.Desktop.ViewModel;
+﻿using iBank.Core.Extensions;
+using iBank.Operator.Desktop.Data;
+using iBank.Operator.Desktop.ViewModels;
 
 using OfficeOpenXml;
 
@@ -15,7 +14,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace iBank.Desktop.View
+namespace iBank.Operator.Desktop.Views
 {
     /// <summary>
     /// Interaction logic for SPIC.xaml

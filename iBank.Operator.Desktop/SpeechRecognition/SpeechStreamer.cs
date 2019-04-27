@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 
-namespace iBank.Desktop.SpeechRecognition
+namespace iBank.Operator.Desktop.SpeechRecognition
 {
     public class SpeechStreamer : Stream
     {

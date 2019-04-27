@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace iBank.Desktop
+namespace iBank.Operator.Desktop
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -10,6 +10,8 @@ namespace iBank.Desktop
     {
         static App()
         {
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
             AppDomain.CurrentDomain.UnhandledException += (s, e) =>
             {
                 if (e.ExceptionObject is Exception ex)

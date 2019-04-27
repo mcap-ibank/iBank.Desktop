@@ -1,9 +1,9 @@
-﻿using iBank.Core.Database;
+﻿using iBank.Operator.Desktop.Database;
 
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace iBank.Desktop.ViewModel
+namespace iBank.Operator.Desktop.ViewModels
 {
     public class VerificationViewModel : INotifyPropertyChanged
     {

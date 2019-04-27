@@ -5,21 +5,20 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-using iBank.Core;
-using iBank.Core.Database;
-using iBank.Core.Utils;
-
-using iBank.Desktop.SpeechRecognition;
-using iBank.Desktop.ViewModel;
-using iBank.Desktop.Extensions;
+using iBank.Operator.Desktop;
+using iBank.Operator.Desktop.Database;
+using iBank.Operator.Desktop.Extensions;
+using iBank.Operator.Desktop.SpeechRecognition;
+using iBank.Operator.Desktop.ViewModels;
 
 using OfficeOpenXml;
 
 using Ookii.Dialogs.Wpf;
 
 using TableDependency.SqlClient.Base.Enums;
+using iBank.Core;
 
-namespace iBank.Desktop.View
+namespace iBank.Operator.Desktop.Views
 {
     /// <summary>
     /// Interaction logic for TeamView.xaml
@@ -300,21 +299,21 @@ namespace iBank.Desktop.View
         // Фильтрация ввода ФИО
         private void TextBox_FilterFIO_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!CommonUtils.FilterText(e.Text[0]))
+            if (!iBank.Core.Utils.FilterText(e.Text[0]))
                 e.Handled = true;
         }
 
         // Фильтрация ввода паспорта
         private void TextBox_FilterPassport_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!CommonUtils.FilterPassport(e.Text[0]))
+            if (!iBank.Core.Utils.FilterPassport(e.Text[0]))
                 e.Handled = true;
         }
 
         // Фильтрация ввода карты
         private void TextBox_FilterAccountNumber_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!CommonUtils.FilterCardNumber(e.Text[0]))
+            if (!iBank.Core.Utils.FilterCardNumber(e.Text[0]))
                 e.Handled = true;
         }
 

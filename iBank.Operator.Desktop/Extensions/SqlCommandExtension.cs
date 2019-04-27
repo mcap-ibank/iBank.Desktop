@@ -1,7 +1,9 @@
-﻿using System;
+﻿using iBank.Operator.Desktop.Utils;
+
+using System;
 using System.Data.SqlClient;
 
-namespace iBank.Desktop.Extensions
+namespace iBank.Operator.Desktop.Extensions
 {
     public static class SqlCommandExtension
     {
@@ -14,7 +16,7 @@ namespace iBank.Desktop.Extensions
             }
             catch (Exception ex)// when(ex is SqlException)
             {
-                Utils.ShowException(ex);
+                CommonUtils.ShowException(ex);
                 result = null;
                 return false;
             }
@@ -28,7 +30,7 @@ namespace iBank.Desktop.Extensions
             }
             catch (Exception ex)// when(ex is SqlException)
             {
-                Utils.ShowException(ex);
+                CommonUtils.ShowException(ex);
                 rowsAffected = -1;
                 return false;
             }

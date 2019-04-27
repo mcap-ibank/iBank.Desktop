@@ -1,8 +1,7 @@
-﻿using iBank.Core;
-using iBank.Core.Database;
-using iBank.Core.Files;
-using iBank.Desktop.Data;
-using iBank.Desktop.DragDrop;
+﻿using iBank.Operator.Desktop.Database;
+using iBank.Operator.Desktop.Files;
+using iBank.Operator.Desktop.Data;
+using iBank.Operator.Desktop.DragDrop;
 
 using System;
 using System.Collections.ObjectModel;
@@ -17,7 +16,7 @@ using TableDependency.SqlClient.Base.Enums;
 using TableDependency.SqlClient.Base.EventArgs;
 using TableDependency.SqlClient.Exceptions;
 
-namespace iBank.Desktop.ViewModel
+namespace iBank.Operator.Desktop.ViewModels
 {
     public class TeamViewModel : INotifyPropertyChanged
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace iBank.Desktop.SpeechRecognition
+namespace iBank.Operator.Desktop.SpeechRecognition
 {
     public class TeamSpeechCommandEventArgs : EventArgs
     {
