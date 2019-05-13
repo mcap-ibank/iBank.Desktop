@@ -18,8 +18,8 @@ namespace iBank.Operator.Desktop.ViewModels
     {
         public static IEnumerable<TSource> DistinctBy<TSource, TKey>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
         {
-            HashSet<TKey> seenKeys = new HashSet<TKey>();
-            foreach (TSource element in source)
+            var seenKeys = new HashSet<TKey>();
+            foreach (var element in source)
             {
                 if (seenKeys.Add(keySelector(element)))
                     yield return element;
@@ -32,7 +32,7 @@ namespace iBank.Operator.Desktop.ViewModels
         public ObservableCollection<Entry> Months { get; } = new ObservableCollection<Entry>();
         public Entry SelectedMonth { get; set; }
 
-        public DateTime? SelectedDate { get; set; }
+        public DateTime? SelectedDate { get; set; } = DateTime.Now;
 
         public SelectedDatesCollection SelectedDates { get; set; }
 

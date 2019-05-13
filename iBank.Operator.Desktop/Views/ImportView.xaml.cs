@@ -31,11 +31,7 @@ namespace iBank.Operator.Desktop.Views
         private void Button_SelectFolder_Click(object sender, RoutedEventArgs e)
         {
             var openFileDialog = new VistaFolderBrowserDialog();
-            if (openFileDialog.ShowDialog() == false)
-            {
-                MessageBox.Show("Папка не выбрана!", "Ошибка!");
-                return;
-            }
+            if (openFileDialog.ShowDialog() == false) return;
 
             ViewModel.Files.Clear();
             foreach (var file in Directory.GetFiles(openFileDialog.SelectedPath).Where(f => !Path.GetFileName(f).StartsWith("~$")))
@@ -105,11 +101,7 @@ EXECUTE pr_AddPerson
                 CheckPathExists = true,
                 DereferenceLinks = true,
             };
-            if (openFileDialog.ShowDialog() == false)
-            {
-                MessageBox.Show("Файл не выбран!", "Ошибка!");
-                return;
-            }
+            if (openFileDialog.ShowDialog() == false) return;
 
 
             ViewModel.PersonsToCheck.Clear();

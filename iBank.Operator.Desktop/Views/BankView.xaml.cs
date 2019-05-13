@@ -65,7 +65,7 @@ namespace iBank.Operator.Desktop.Views
             };
             if (openFileDialog.ShowDialog() == false)
                 return;
-            
+
             await ViewModel.ImportDailyReportAsync(openFileDialog.FileName);
         }
 

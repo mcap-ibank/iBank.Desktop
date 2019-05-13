@@ -41,11 +41,7 @@ namespace iBank.Operator.Desktop.Views
                 CheckPathExists = true,
                 DereferenceLinks = true,
             };
-            if (openFileDialog.ShowDialog() == false)
-            {
-                MessageBox.Show("Файл не выбран!", "Ошибка!");
-                return;
-            }
+            if (openFileDialog.ShowDialog() == false) return;
 
             foreach (var fileName in openFileDialog.FileNames)
             {
@@ -297,11 +293,7 @@ namespace iBank.Operator.Desktop.Views
                 CheckPathExists = true,
                 DereferenceLinks = true,
             };
-            if (openFileDialog.ShowDialog() == false)
-            {
-                MessageBox.Show("Файл не выбран!", "Ошибка!");
-                return;
-            }
+            if (openFileDialog.ShowDialog() == false) return;
 
             ViewModel.ImportDailyReportAsync(openFileDialog.FileNames);
         }

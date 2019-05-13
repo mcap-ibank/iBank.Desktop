@@ -11,6 +11,13 @@ using System.Net;
 
 namespace iBank.Operator.Desktop.Files
 {
+    public class EndPointNotAvailableException : Exception
+    {
+        public EndPointNotAvailableException() : base() { }
+        protected EndPointNotAvailableException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+        public EndPointNotAvailableException(string message) : base(message) { }
+        public EndPointNotAvailableException(string message, Exception innerException) : base(message, innerException) { }
+    }
 
     public class ConfigJsonFile : BaseConfigJsonFile
     {
@@ -84,7 +91,7 @@ namespace iBank.Operator.Desktop.Files
             if (host == null)
                 host = GetFirstValidIPAddress(Bank_Provider_Endpoints, Bank_Provider_Port);
             if (host == null)
-                throw new Exception("Банк недоступен! Компьютер подключен в сеть?");
+                throw new EndPointNotAvailableException("Банк недоступен! Компьютер подключен в сеть?");
 
             return new BankProviderClient(host, Bank_Provider_Port);
         }

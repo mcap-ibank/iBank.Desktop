@@ -1,6 +1,7 @@
 ﻿using iBank.Operator.Desktop.Data;
 using iBank.Operator.Desktop.Database;
 using iBank.Operator.Desktop.Extensions;
+using iBank.Operator.Desktop.Files;
 
 using System;
 using System.Collections.ObjectModel;
@@ -37,31 +38,33 @@ namespace iBank.Operator.Desktop.ViewModels
 
         public Task ImportDailyReportAsync() => Task.Run(() =>
         {
-            var personsFromDatabase = PersonAccountNumber.GetAll().ToList();
-            var personsFromBank = BankProviderPersonExtensions.GetExecutedByDate(DateTime.Now).ToList();
-            ImportPersonCount = $"Найдено: {personsFromBank.Count}";
-            ImportMaxProgress = personsFromBank.Count;
-            ImportCurrentProgress = 0;
-            foreach (var personBank in personsFromBank)
+            try
             {
-                ImportCurrentProgress++;
-
-                var person = personsFromDatabase.Find(p => p.PassportSerial == personBank.PassportSerial);
-                if (person == null)
+                var personsFromDatabase = PersonAccountNumber.GetAll().ToList();
+                var personsFromBank = BankProviderPersonExtensions.GetExecutedByDate(DateTime.Now).ToList();
+                ImportPersonCount = $"Найдено: {personsFromBank.Count}";
+                ImportMaxProgress = personsFromBank.Count;
+                ImportCurrentProgress = 0;
+                foreach (var personBank in personsFromBank)
                 {
-                    MessageBox.Show($@"Не найден человек!
+                    ImportCurrentProgress++;
+
+                    var person = personsFromDatabase.Find(p => p.PassportSerial == personBank.PassportSerial);
+                    if (person == null)
+                    {
+                        MessageBox.Show($@"Не найден человек!
 {personBank.PassportSerial} 
 {personBank.LastName} 
 {personBank.FirstName}
 {personBank.Patronymic}
 {personBank.BirthDate}", "Ошибка!", MessageBoxButton.OK);
-                    continue;
-                }
+                        continue;
+                    }
 
 
-                void ReportError()
-                {
-                    MessageBox.Show($@"Обнаружено расхождение! (БД | БАНК)
+                    void ReportError()
+                    {
+                        MessageBox.Show($@"Обнаружено расхождение! (БД | БАНК)
 {person.LastName} | {personBank.LastName}
 {person.FirstName} | {personBank.FirstName}
 {person.Patronymic} | {personBank.Patronymic}
@@ -70,34 +73,43 @@ namespace iBank.Operator.Desktop.ViewModels
 {person.PassportIssueDateDate.ToShortDateString()} | {personBank.PassportIssueDateDate.ToShortDateString()}
 {person.PassportDivisionCode} | {personBank.PassportDivisionCode}
 {person.AccountNumber} | {personBank.AccountNumber}", "Ошибка!", MessageBoxButton.OK);
-                }
+                    }
 
-                if (!person.LastName.Equals(personBank.LastName))
-                    ReportError();
-                if (!person.FirstName.Equals(personBank.FirstName))
-                    ReportError();
-                if (!person.Patronymic.Equals(personBank.Patronymic) && !person.Patronymic.Equals(".") && !personBank.Patronymic.Equals(""))
-                    ReportError();
+                    if (!person.LastName.Equals(personBank.LastName))
+                        ReportError();
+                    if (!person.FirstName.Equals(personBank.FirstName))
+                        ReportError();
+                    if (!person.Patronymic.Equals(personBank.Patronymic) && !person.Patronymic.Equals(".") && !personBank.Patronymic.Equals(""))
+                        ReportError();
 
-                if (!person.BirthDateDate.Equals(personBank.BirthDateDate))
-                    ReportError();
+                    if (!person.BirthDateDate.Equals(personBank.BirthDateDate))
+                        ReportError();
 
-                if (!person.PassportIssueDateDate.Equals(personBank.PassportIssueDateDate))
-                   ReportError();
+                    if (!person.PassportIssueDateDate.Equals(personBank.PassportIssueDateDate))
+                        ReportError();
 
-                if (!person.PassportDivisionCode.Equals(personBank.PassportDivisionCode))
-                    ReportError();
+                    if (!person.PassportDivisionCode.Equals(personBank.PassportDivisionCode))
+                        ReportError();
 
-                if (!person.AccountNumber.Equals(personBank.AccountNumber))
-                {
-                    var sql = $@"
+                    if (!person.AccountNumber.Equals(personBank.AccountNumber))
+                    {
+                        var sql = $@"
 UPDATE person_card SET account_number = '{personBank.AccountNumber}' WHERE passport_serial = '{person.PassportSerial}'
 
 IF @@ROWCOUNT = 0
    INSERT INTO person_card (passport_serial, account_number) VALUES ('{person.PassportSerial}', '{personBank.AccountNumber}')";
-                    using (var sqlcmd = new SqlCommandExecutor(sql))
-                        sqlcmd.TryExecuteScalar(out _);
+                        using (var sqlcmd = new SqlCommandExecutor(sql))
+                            sqlcmd.TryExecuteScalar(out _);
+                    }
                 }
+            }
+            catch (Exception ex) when (ex is EndPointNotAvailableException exception)
+            {
+                ImportCurrentProgress = -1;
+                MessageBox.Show(
+@"Не удалось подключиться в банковской БД!
+Банковский компьютер подключен сеть?
+Программа на банковском комьютере запущена?", "Внимание!");
             }
         });
 
@@ -170,33 +182,35 @@ IF @@ROWCOUNT = 0
 
         public Task CheckTotalReportAsync() => Task.Run(() =>
         {
-            var personsFromDatabase = PersonAccountNumber.GetAll().ToList();
-            var personsFromBank = BankProviderPersonExtensions.GetAll().Where(p => !string.IsNullOrEmpty(p.PassportSerial)).ToList();
-            CheckPersonCount = $"Найдено: {personsFromBank.Count}";
-            CheckMaxProgress = personsFromDatabase.Count;
-            CheckCurrentProgress = 0;
-            foreach (var personDatabase in personsFromDatabase)
+            try
             {
-                CheckCurrentProgress++;
-
-                var personBank = personsFromBank.Find(p => p.PassportSerial == personDatabase.PassportSerial);
-                if (personBank == null)
+                var personsFromDatabase = PersonAccountNumber.GetAll().ToList();
+                var personsFromBank = BankProviderPersonExtensions.GetAll().Where(p => !string.IsNullOrEmpty(p.PassportSerial)).ToList();
+                CheckPersonCount = $"Найдено: {personsFromBank.Count}";
+                CheckMaxProgress = personsFromDatabase.Count;
+                CheckCurrentProgress = 0;
+                foreach (var personDatabase in personsFromDatabase)
                 {
-                    /*
-                    MessageBox.Show($@"Не найден человек в Банке!
-{personDatabase.PassportSerial} 
-{personDatabase.LastName} 
-{personDatabase.FirstName}
-{personDatabase.Patronymic}
-{personDatabase.BirthDate}", "Ошибка!", MessageBoxButton.OK);
-                    */
-                    continue;
-                }
+                    CheckCurrentProgress++;
+
+                    var personBank = personsFromBank.Find(p => p.PassportSerial == personDatabase.PassportSerial);
+                    if (personBank == null)
+                    {
+                        /*
+                        MessageBox.Show($@"Не найден человек в Банке!
+    {personDatabase.PassportSerial} 
+    {personDatabase.LastName} 
+    {personDatabase.FirstName}
+    {personDatabase.Patronymic}
+    {personDatabase.BirthDate}", "Ошибка!", MessageBoxButton.OK);
+                        */
+                        continue;
+                    }
 
 
-                void ReportError()
-                {
-                    MessageBox.Show($@"Обнаружено расхождение! (БД|БАНК)
+                    void ReportError()
+                    {
+                        MessageBox.Show($@"Обнаружено расхождение! (БД|БАНК)
 {personDatabase.LastName.PadRight(20, ' ')}  | {personBank.LastName}
 {personDatabase.FirstName.PadRight(20, ' ')} | {personBank.FirstName}
 {personDatabase.Patronymic.PadRight(20, ' ')} | {personBank.Patronymic}
@@ -206,37 +220,45 @@ IF @@ROWCOUNT = 0
 {personDatabase.PassportDivisionCode.PadRight(20, ' ')} | {personBank.PassportDivisionCode}
 {(string.IsNullOrEmpty(personDatabase.AccountNumber) ? "Не назначена карта" : personDatabase.AccountNumber).PadRight(20, ' ')} | {(string.IsNullOrEmpty(personBank.AccountNumber) ? "Не назначена карта" : personBank.AccountNumber)}
 Исполнено: {((personBank.CardGiven ?? false) ? "Да" : "Нет").PadRight(20, ' ')}", "Ошибка!", MessageBoxButton.OK);
-                }
+                    }
 
-                if (!personDatabase.LastName.Equals(personBank.LastName))
-                    ReportError();
-                if (!personDatabase.FirstName.Equals(personBank.FirstName))
-                    ReportError();
-                if (!personDatabase.Patronymic.Equals(personBank.Patronymic, StringComparison.OrdinalIgnoreCase) && !personBank.Patronymic.Equals(".") && !personDatabase.Patronymic.Equals(" "))
-                    ReportError();
+                    if (!personDatabase.LastName.Equals(personBank.LastName))
+                        ReportError();
+                    if (!personDatabase.FirstName.Equals(personBank.FirstName))
+                        ReportError();
+                    if (!personDatabase.Patronymic.Equals(personBank.Patronymic, StringComparison.OrdinalIgnoreCase) && !personBank.Patronymic.Equals(".") && !personDatabase.Patronymic.Equals(" "))
+                        ReportError();
 
-                if (!personDatabase.BirthDateDate.Equals(personBank.BirthDateDate))
-                    ReportError();
+                    if (!personDatabase.BirthDateDate.Equals(personBank.BirthDateDate))
+                        ReportError();
 
-                if (!personDatabase.PassportIssueDateDate.Equals(personBank.PassportIssueDateDate))
-                    ReportError();
+                    if (!personDatabase.PassportIssueDateDate.Equals(personBank.PassportIssueDateDate))
+                        ReportError();
 
-                if (!personDatabase.PassportDivisionCode.Equals(personBank.PassportDivisionCode))
-                    ReportError();
+                    if (!personDatabase.PassportDivisionCode.Equals(personBank.PassportDivisionCode))
+                        ReportError();
 
-                if (!personDatabase.AccountNumber.Equals(personBank.AccountNumber))
-                {
-                    if (!string.IsNullOrEmpty(personBank.AccountNumber))
-                        ;
+                    if (!personDatabase.AccountNumber.Equals(personBank.AccountNumber))
+                    {
+                        if (!string.IsNullOrEmpty(personBank.AccountNumber))
+                            ;
 
-                    var sql = $@"
+                        var sql = $@"
 UPDATE person_card SET account_number = '{personBank.AccountNumber}' WHERE passport_serial = '{personDatabase.PassportSerial}'
 
 IF @@ROWCOUNT = 0
    INSERT INTO person_card (passport_serial, account_number) VALUES ('{personDatabase.PassportSerial}', '{personBank.AccountNumber}')";
-                    using (var sqlcmd = new SqlCommandExecutor(sql))
-                        sqlcmd.TryExecuteScalar(out _);
+                        using (var sqlcmd = new SqlCommandExecutor(sql))
+                            sqlcmd.TryExecuteScalar(out _);
+                    }
                 }
+            }
+            catch (Exception ex) when (ex is EndPointNotAvailableException exception)
+            {
+                MessageBox.Show(
+@"Не удалось подключиться в банковской БД!
+Банковский компьютер подключен сеть?
+Программа на банковском комьютере запущена?", "Внимание!");
             }
         });
 

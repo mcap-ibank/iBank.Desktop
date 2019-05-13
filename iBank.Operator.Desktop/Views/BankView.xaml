@@ -15,7 +15,7 @@
                 <Grid>
                     <GroupBox Header="Импорт/Экспорт Банковских  данных" Height="174" Margin="10,10,10,0" VerticalAlignment="Top">
                         <Grid>
-                            <Button Content="Импорт исполненных карт (БД)" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="200" Click="Button_Today_DB_Click" Height="21"/>
+                            <Button Content="Импорт исполненных карт (Сеть)" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="200" Click="Button_Today_DB_Click" Height="21"/>
                             <Button Content="Импорт исполненных карт (Файл)" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="200" Click="Button_Today_File_Click" Height="21"/>
                             <Button Content="Экспорт электронок за вчера" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top" Width="200" Click="Button_Report_Click" Height="21"/>
                             <Button Content="Экспорт персонализации ВТБ" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top" Width="200" Height="21" Click="Button_Click"/>
@@ -25,7 +25,7 @@
                     </GroupBox>
                     <GroupBox Header="Сверка с Банковскими данными" Margin="10,189,10,0" Height="80" VerticalAlignment="Top">
                         <Grid>
-                            <Button Content="Проверить данные за призыв (БД)" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="220" Click="Button_WholePeriod_DB_Click"/>
+                            <Button Content="Проверить данные за призыв (Сеть)" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="220" Click="Button_WholePeriod_DB_Click"/>
                             <Button Content="Проверить данные за призыв (Файл)" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="220" Click="Button_WholePeriod_File_Click"/>
                             <ProgressBar Maximum="{Binding CheckMaxProgress}" Value="{Binding CheckCurrentProgress}" Height="19" Margin="235,35,10,0" VerticalAlignment="Top"/>
                             <Label Content="{Binding CheckPersonCount}" Margin="235,0,10,0" VerticalAlignment="Top" Height="30" VerticalContentAlignment="Bottom"/>
