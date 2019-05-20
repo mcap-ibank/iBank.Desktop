@@ -8,13 +8,25 @@
         Title="Программный комплекс iBank" Height="600" Width="1200" MinHeight="600" MinWidth="1200">
     <Grid>
         <TabControl x:Name="TabControl">
-            <TabItem Header="Банк"><views:BankView Width="Auto" Height="Auto" /></TabItem>
-            <TabItem Header="Прием"><views:ImportView Width="Auto" Height="Auto" /></TabItem>
-            <TabItem Header="Команды"><views:TeamView Width="Auto" Height="Auto" /></TabItem>
-            <TabItem Header="База Данных"><views:VerificationView Width="Auto" Height="Auto" /></TabItem>
-            <TabItem Header="ЕРЦ"><views:SPICView Width="Auto" Height="Auto" /></TabItem>
+            <TabItem Header="Банк">
+                <views:BankView Width="Auto" Height="Auto" />
+            </TabItem>
+            <TabItem Header="Прием">
+                <views:ImportView Width="Auto" Height="Auto" />
+            </TabItem>
+            <TabItem Header="Команды">
+                <views:TeamView Width="Auto" Height="Auto" />
+            </TabItem>
+            <TabItem Header="База Данных">
+                <views:VerificationView Width="Auto" Height="Auto" />
+            </TabItem>
+            <TabItem Header="Дакта">
+                <views:DactyloscopyView Width="Auto" Height="Auto" />
+            </TabItem>
+            <TabItem Header="ЕРЦ">
+                <views:SPICView Width="Auto" Height="Auto" />
+            </TabItem>
         </TabControl>
-        
     </Grid>
 </Window>
 

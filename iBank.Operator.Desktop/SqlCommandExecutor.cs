@@ -11,7 +11,7 @@ namespace iBank.Operator.Desktop
         private SqlConnection Connection { get; } = ConnectionManager.MSSQL_Connection;
         public SqlCommand Command { get; }
 
-        public SqlCommandExecutor(string sql, int timeout = 3)
+        public SqlCommandExecutor(string sql, int timeout = 30)
         {
 #if !KEEPSQLOPEN
             if (Connection.State == ConnectionState.Closed)
